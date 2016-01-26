@@ -108,6 +108,10 @@ class CorsMiddleware(object):
             # todo: check hostname from db instead
             url = urlparse(origin)
 
+            for predicate in settings.CORS_ORIGIN_PREDICATE_WHITELIST:
+                if predicate(request, url.netloc):
+                    response[ACCESS_CONTROL_ALLOW_ORIGIN] = origin
+
             if settings.CORS_MODEL is not None:
                 model = get_model(*settings.CORS_MODEL.split('.'))
                 if model.objects.filter(**{settings.CORS_FIELD_NAME: url.netloc}).exists():
