@@ -110,7 +110,8 @@ class CorsMiddleware(object):
 
             if settings.CORS_MODEL is not None:
                 model = get_model(*settings.CORS_MODEL.split('.'))
-                if model.objects.filter(cors=url.netloc).exists():
+                field_name = getattr(settings, 'CORS_FIELD_NAME', 'cors')
+                if model.objects.filter(**{field_name: url.netloc}).exists():
                     response[ACCESS_CONTROL_ALLOW_ORIGIN] = origin
 
             if (not settings.CORS_ORIGIN_ALLOW_ALL and
