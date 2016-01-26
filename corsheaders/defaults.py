@@ -42,7 +42,7 @@ CORS_URLS_REGEX = getattr(settings, 'CORS_URLS_REGEX', '^.*$')
 
 CORS_MODEL = getattr(settings, 'CORS_MODEL', None)
 
-CORS_MODEL = getattr(settings, 'CORS_FIELD_NAME', 'cors')
+CORS_FIELD_NAME = getattr(settings, 'CORS_FIELD_NAME', 'cors')
 
 CORS_REPLACE_HTTPS_REFERER = getattr(
     settings,
